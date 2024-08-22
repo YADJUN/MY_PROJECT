@@ -1,15 +1,14 @@
 package jm.task.core.jdbc.dao;
+
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Utils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import javax.persistence.Entity;
+
 import javax.persistence.Query;
-import javax.persistence.Table;
 import java.util.List;
 
-@Entity
-@Table(name = "kata_hibernate")
+
 public class UserDaoHibernateImpl implements UserDao {
     private static final SessionFactory sessionFactory = Utils.getSessionFactory();
 
@@ -21,7 +20,8 @@ public class UserDaoHibernateImpl implements UserDao {
     public void createUsersTable() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Query query = session.createSQLQuery("CREATE TABLE kata_hibernate (id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(20),lastname VARCHAR(20),age INT)");
+        Query query = session.createSQLQuery(
+                "CREATE TABLE kata_hibernate (id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(20),lastname VARCHAR(20),age INT)");
         query.executeUpdate();
         session.getTransaction().commit();
     }
